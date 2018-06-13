@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DataFlow</title>
+    <link rel="stylesheet" href="../lib/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="flow.css" type="text/css"/>
+    <link rel="stylesheet" href="../lib/jquery-ui.css">
+</head>
+<body>
+<!--flow名称，按钮菜单等-->
+<div id="header">
+</div>
+<div id="toolbar">
+    <div class="menu">
+        <h4>数据集</h4>
+        <div class="menu-container">
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_input.svg">
+                </button>
+                <span>输入</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_output.svg">
+                </button>
+                <span>输出</span>
+            </div>
+        </div>
+    </div>
+    <div class="menu">
+        <h4>列转换</h4>
+        <div class="menu-container">
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_constant.svg">
+                </button>
+                <span>常量列</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_calculation.svg">
+                </button>
+                <span>计算</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_column2row.svg">
+                </button>
+                <span>列转行</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_columnlink.svg">
+                </button>
+                <span>连接列</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_calculation_date.svg">
+                </button>
+                <span>日期计算</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_group_by.svg">
+                </button>
+                <span>分组聚合</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_order_by.svg">
+                </button>
+                <span>排序和累计</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_column_select.svg">
+                </button>
+                <span>选择列</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_alter_column_type.svg">
+                </button>
+                <span>修改列类型</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_row2column.svg">
+                </button>
+                <span>行转列</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_calculation_text.svg">
+                </button>
+                <span>文本计算</span>
+            </div>
+        </div>
+    </div>
+    <div class="menu">
+        <h4>数据转换</h4>
+        <div class="menu-container">
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_filter.svg">
+                </button>
+                <span>过滤</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_del_repeat.svg">
+                </button>
+                <span>删除重复项</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_text_replace.svg">
+                </button>
+                <span>替换文本</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_set_column_value.svg">
+                </button>
+                <span>设置列值</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_format_text.svg">
+                </button>
+                <span>文本格式化</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_mapping.svg">
+                </button>
+                <span>值映射</span>
+            </div>
+        </div>
+    </div>
+    <div class="menu">
+        <h4>联合数据</h4>
+        <div class="menu-container">
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_merge.svg">
+                </button>
+                <span>合并</span>
+            </div>
+            <div class="menu-item">
+                <button>
+                    <img src="svg/flow_relation.svg">
+                </button>
+                <span>关联</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="canvas-container">
+    <svg id="canvas-svg">
+        <defs>
+            <marker id="normal" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="6" markerHeight="6" orient="auto"
+                    fill="#000000">
+                <path d="M2,3 L0,6 L6,3 L0,0 z"></path>
+            </marker>
+            <filter id="component-drop-shadow" height="140%" y="-20%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"></feGaussianBlur>
+                <feOffset in="blur" dx="0" dy="1" result="offsetBlur"></feOffset>
+                <feFlood flood-color="#000000" flood-opacity="0.4" result="offsetColor"></feFlood>
+                <feComposite in="offsetColor" in2="offsetBlur" operator="in" result="offsetColorBlur"></feComposite>
+                <feMerge>
+                    <feMergeNode in="offsetColorBlur"></feMergeNode>
+                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                </feMerge>
+            </filter>
+        </defs>
+        <g id="canvas-g">
+            <g class="processors"></g>
+            <g class="connections visible" pointer-events="stroke"></g>
+        </g>
+    </svg>
+</div>
+</body>
+<script src="../lib/jquery-3.3.1.min.js"></script>
+<script src="../lib/jquery-ui.js"></script>
+<script src="../lib/d3.js" charset="utf-8"></script>
+<script src="../lib/utils.js"></script>
+<script src="zoom.js" charset="utf-8"></script>
+<script src="connect.js" charset="utf-8"></script>
+<script src="flow.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        FlowComponent('.menu-item').init();
+    })
+</script>
+</html>

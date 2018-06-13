@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>learn nifi</title>
+    <link rel="stylesheet" href="./lib/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="nifi.css" type="text/css"/>
+    <link rel="stylesheet" href="./lib/jquery-ui.css">
+</head>
+<body>
+<div id="header">
+    <button class="component-button"><i class="fab fa-asymmetrik"></i></button>
+    <button class="component-button"><i class="fab fa-autoprefixer"></i></button>
+    <button class="component-button"><i class="fas fa-ban"></i></button>
+    <button class="component-button"><i class="fas fa-link"></i></button>
+</div>
+<div id="canvas-container">
+    <svg id="canvas-svg">
+        <g id="canvas">
+            <g class="processors"></g>
+        </g>
+    </svg>
+</div>
+</body>
+<script src="./lib/jquery-3.3.1.min.js"></script>
+<script src="./lib/jquery-ui.js"></script>
+<script src="./lib/d3.js" charset="utf-8"></script>
+<script src="canvas.js"></script>
+<script src="component.js"></script>
+<script src="lib/utils.js"></script>
+</html>
